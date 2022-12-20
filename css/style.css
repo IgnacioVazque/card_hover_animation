@@ -43,31 +43,9 @@ body {
     --padding: 1.5rem;
     padding: var(--padding);
     background: linear-gradient(hsl(0 0% 0% / 0), hsl(20 0% 0% / 0.3) 20%, hsl(0 0% 0% / 1));
-    transform: translateY(70%);
-    transition: transform 500ms ease;
-}
-
-.card:hover .card-content, 
-.card:focus-within .card-content{
-    transform: translateY(0);
-    transition-delay: 300ms;
-}
-
-.card:focus-within .card-content {
-    transition-duration: 0ms;
-}
-
-.card-content > *:not(.card-title) {
-    opacity: 0;
-    transition: opacity 500ms linear;
 }
 
 
-.card:hover .card-content > *:not(.car-title),
-.card:focus-within .card-content > *:not(.card-title) {
-    opacity: 1;
-    transition-delay: 750ms;
-}
 
 .card:hover .card-content {
     transform: translateY(0);
@@ -86,7 +64,7 @@ body {
     bottom: -2px;
     width: calc(100% + var(--padding));
     background: var(--clr-accent-400);
-    transform: scaleX(0);
+   
     transform-origin: left;
     transition: transform 500ms ease;
 }
@@ -94,6 +72,38 @@ body {
 .card:hover .card-title::after, 
 .card:focus-within .card-title::after {
     transform: scaleX(1);
+}
+
+/* Contenido en dispositivos moviles se muestra en desktop no a menos que se coloque el cursor */
+@media (hover) {
+    .card-content {
+        transform: translateY(70%);
+        transition: transform 500ms ease;
+    }
+    .card:hover .card-content, 
+    .card:focus-within .card-content{
+      transform: translateY(0);
+     transition-delay: 300ms;
+    }
+
+    .card:focus-within .card-content {
+        transition-duration: 0ms;
+    }
+
+    .card-content > *:not(.card-title) {
+        opacity: 0;
+        transition: opacity 500ms linear;
+    }
+
+    .card:hover .card-content > *:not(.car-title),
+    .card:focus-within .card-content > *:not(.card-title) {
+        opacity: 1;
+        transition-delay: 750ms;
+    }   
+
+    .card-title::after {
+        transform: scaleX(0);
+    }
 }
 
 .button {
@@ -109,4 +119,22 @@ body {
 .button:hover,
 .button:focus {
     background-color: var(--clr-neutral-100);
+}
+
+
+/* Reduce motion */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms
+        !important;
+        animation-iteration-count: 1
+        !important;
+        transition-duration: 0.01ms
+        !important;
+        scroll-behavior: auto !important;
+        transition-delay: 0ms !important;
+    }
 }
